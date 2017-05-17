@@ -7,9 +7,6 @@ import org.testng.annotations.Test;
  * Created by arciom on 17.05.2017.
  */
 public class PointTest {
-  public PointTest() {
-
-  }
   @Test
   public void rightResultTestDistance() {
     Point p1 = new Point(2.8, 6.9);
