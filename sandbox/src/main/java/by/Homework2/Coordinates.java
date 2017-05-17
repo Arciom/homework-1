@@ -2,9 +2,9 @@ package by.Homework2;
 
 public class Coordinates {
   public static void main(String[] args) {
-    Point pointFirst = new Point(2.8, 4.9);
-    Point pointSecond = new Point(4.9, 8.1);
-    Point point = new Point();
-    System.out.println("Растояние между точками: " + point.distance(pointFirst, pointSecond));
+    Point p1 = new Point(2.8, 6.9);
+    Point p2 = new Point(6.9, 8.1);
+
+    System.out.println("Растояние между точками: " + p1.distance(p2));
   }
 }
