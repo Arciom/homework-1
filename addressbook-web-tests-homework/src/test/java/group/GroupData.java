@@ -1,4 +1,4 @@
-package by.homework4;
+package group;
 
 public class GroupData {
   private final String name;
