@@ -13,6 +13,15 @@ import java.util.concurrent.TimeUnit;
 public class GroupCreationTest {
   FirefoxDriver wd;
 
+  public static boolean isAlertPresent(FirefoxDriver wd) {
+    try {
+      wd.switchTo().alert();
+      return true;
+    } catch (NoAlertPresentException e) {
+      return false;
+    }
+  }
+
   @BeforeMethod
   public void setUp() throws Exception {
     wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
@@ -72,14 +81,5 @@ public class GroupCreationTest {
   @AfterMethod
   public void tearDown() {
     wd.quit();
-  }
-
-  public static boolean isAlertPresent(FirefoxDriver wd) {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
   }
 }
