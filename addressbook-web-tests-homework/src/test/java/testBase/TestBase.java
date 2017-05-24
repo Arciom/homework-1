@@ -1,4 +1,4 @@
-package tests;
+package testBase;
 
 import appmanager.ApplicationManager;
 import org.testng.annotations.AfterMethod;

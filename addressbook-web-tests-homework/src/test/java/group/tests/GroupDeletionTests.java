@@ -1,6 +1,7 @@
-package tests;
+package group.tests;
 
 import org.testng.annotations.Test;
+import testBase.TestBase;
 
 public class GroupDeletionTests extends TestBase {
 

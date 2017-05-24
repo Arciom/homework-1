@@ -1,4 +1,4 @@
-package module;
+package moduleGroup;
 
 public class GroupData {
   private final String name;
