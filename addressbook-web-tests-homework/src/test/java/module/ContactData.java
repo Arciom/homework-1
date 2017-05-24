@@ -1,4 +1,4 @@
-package group;
+package module;
 
 public class ContactData {
   private final String firstname;
