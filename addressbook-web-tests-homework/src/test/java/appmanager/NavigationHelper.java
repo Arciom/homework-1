@@ -14,7 +14,14 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoGroupPage() {
-    click(By.linkText("GROUPS"));
+
+    if (isElementPresent(By.tagName("h1"))
+            && wd.findElement(By.tagName("h1")).getText().equals("GROUPS")
+            && isElementPresent(By.name("new"))) {
+      return;
+    }
+      click(By.linkText("GROUPS"));
+
   }
 
   public void gotoAddNewPage() {
@@ -22,7 +29,30 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoHome() {
+    if (isElementPresent(By.id("maintable"))) {
+      return;
+    }
     click(By.linkText("HOME"));
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
