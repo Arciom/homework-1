@@ -25,6 +25,10 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoAddNewPage() {
+    if(isElementPresent(By.tagName("h1"))
+            && wd.findElement(By.tagName("h1")).getText().equals("EDIT_ADD_ENTRY")){
+  return;
+    }
     click(By.linkText("ADD_NEW"));
   }
 
