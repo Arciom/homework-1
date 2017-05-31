@@ -13,6 +13,7 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification() {
     app.getNavigationHelper().gotoHome();
     if(! app.getContactHelper().isThereAContact()) {
+      app.getNavigationHelper().gotoAddNewPage();
       app.getContactHelper().createContact(new ContactData(
               "aaa", "bbb", "ccc",
               "ddd", "eee", "LLC",
