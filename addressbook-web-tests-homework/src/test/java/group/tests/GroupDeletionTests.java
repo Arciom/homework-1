@@ -23,6 +23,24 @@ public class GroupDeletionTests extends TestBase {
     app.getGroupHelper().returnToGroupPage();
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size() - 1);
+ // Лекция 4.6. Сравнение коллекций. Проверяем название внутри групп
+    before.remove(before.size() - 1);
+    Assert.assertEquals(before, after);
+
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
