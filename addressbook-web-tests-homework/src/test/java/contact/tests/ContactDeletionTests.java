@@ -1,6 +1,7 @@
 package contact.tests;
 
 import moduleContact.ContactData;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import testBase.TestBase;
 
@@ -13,6 +14,7 @@ public class ContactDeletionTests extends TestBase{
   @Test
   public void testContactDeletion() {
     app.getNavigationHelper().gotoHome();
+    int before = app.getContactHelper().getContactCount();
     if(!app.getContactHelper().isThereAContact()) {
       app.getNavigationHelper().gotoAddNewPage();
       app.getContactHelper().createContact( new ContactData(
@@ -20,8 +22,10 @@ public class ContactDeletionTests extends TestBase{
               "ddd", "eee", "LLC",
               "Minsk", "test1"), true);
     }
-    app.getContactHelper().selectContact();
+    app.getContactHelper().selectContact(before - 1);
     app.getContactHelper().deleteSelectedContact();
     app.getNavigationHelper().gotoHome();
+    int after = app.getContactHelper().getContactCount();
+    Assert.assertEquals(after, before - 1);
   }
 }
