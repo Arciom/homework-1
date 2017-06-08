@@ -23,6 +23,16 @@ public class ContactCreationTest extends TestBase {
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
+
+    //созданный контакт будет имееть максимальный идентефикатор
+    int max = 0;
+    for(ContactData contactData : after) {
+      if(contactData.getId() > max) {
+        max = contactData.getId();
+      }
+    }
+
+    contact.setId(max);
     //добавляем в список созданный контакт
     before.add(contact);
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
