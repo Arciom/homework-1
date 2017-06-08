@@ -2,7 +2,7 @@ package moduleContact;
 
 public class ContactData {
 
-  private final String id;
+  private final int id;
   private final String firstname;
   private final String middlename;
   private final String lastname;
@@ -13,7 +13,7 @@ public class ContactData {
   private String group;
 
 
-  public ContactData(String id, String firstname, String middlename,
+  public ContactData(int id, String firstname, String middlename,
                      String lastname, String nickname,
                      String title, String company, String address,
                      String group) {
@@ -32,7 +32,7 @@ public class ContactData {
                      String lastname, String nickname,
                      String title, String company, String address,
                      String group) {
-    this.id = null;
+    this.id = 0;
     this.firstname = firstname;
     this.middlename = middlename;
     this.lastname = lastname;
@@ -43,7 +43,7 @@ public class ContactData {
     this.group = group;
   }
 
-  public String getId() {    return id;  }
+  public int getId() {    return id;  }
 
   @Override
   public boolean equals(Object o) {

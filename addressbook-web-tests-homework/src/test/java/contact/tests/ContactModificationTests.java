@@ -35,8 +35,11 @@ public class ContactModificationTests extends TestBase {
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size());
 
+  //удаляем из списка строку до модификации
     before.remove(before.size() - 1);
+    //добавляем в список строку, которая появляется после модфикации
     before.add(contact);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
+   Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }
 }
