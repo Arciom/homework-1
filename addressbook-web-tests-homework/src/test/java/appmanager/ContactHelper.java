@@ -1,7 +1,6 @@
 package appmanager;
 
 import moduleContact.ContactData;
-import moduleGroup.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -57,8 +56,8 @@ public class ContactHelper extends HelperBase {
     wd.switchTo().alert().accept();
   }
 
-  public void initContactModification() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  public void initContactModification(int index) {
+    wd.findElements(By.xpath(".//td[8]")).get(index).click();
   }
 
   public void submitContactModification() {
@@ -76,26 +75,61 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public int getContactCount() {
-    return wd.findElements(By.name("selected[]")).size();
-  }
+ // public int getContactCount() {
+ //   return wd.findElements(By.name("selected[]")).size();
+//  }
 
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
+    List<WebElement> elements = wd.findElements(By.xpath("//tr[contains(@name,\"entry\")]"));
+    //(By.cssSelector("tr[name=entry]")) == (By.xpath("//tr[contains(@name,\"entry\")]"));
     for (WebElement element : elements) {
-      String firstname = element.findElements(By.cssSelector("td")).get(2).getText();
-      String lastname = element.findElements(By.cssSelector("td")).get(1).getText();
-      String address = element.findElements(By.cssSelector("td")).get(3).getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      String firstname = getFirstName(element);
+      String lastname = getLastName(element);
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
       ContactData contact = new ContactData(id, firstname, null,
               lastname, null, null, null,
-              address, null);
+              null, null);
       contacts.add(contact);
     }
     return contacts;
   }
+
+  private String getLastName(WebElement element) {
+    return element.findElement(By.xpath("./td[2]")).getText();
+  }
+
+  private String getFirstName(WebElement element) {
+    return element.findElement(By.xpath("./td[3]")).getText();
+  }
+  //  String lastname = getElementCssSelector(element, "td", 1);
+  //  private String getElementCssSelector(WebElement element, String cssSelector, int cellNumber) {
+  //  return element.findElements(By.cssSelector(cssSelector)).get(cellNumber).getText();
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
