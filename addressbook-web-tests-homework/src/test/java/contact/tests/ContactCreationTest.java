@@ -11,9 +11,9 @@ public class ContactCreationTest extends TestBase {
 
   @Test
   public void testContactCreation() {
-    app.getNavigationHelper().gotoHome();
+    app.goTo().gotoHome();
     List<ContactData> before = app.getContactHelper().getContactList();
-    app.getNavigationHelper().gotoAddNewPage();
+    app.goTo().gotoAddNewPage();
     ContactData contact = new ContactData(
             "aaa", "bbb", "ccc",
             "ddd", "eee", "LLC",
@@ -23,7 +23,7 @@ public class ContactCreationTest extends TestBase {
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
-   //contact.setId(before.stream().max(Comparator.comparingInt(ContactData::getId)).get().getId());
+   //contact.withId(before.stream().max(Comparator.comparingInt(ContactData::getId)).get().getId());
     // упорядочиваем списки перед сравнением
     contact.setId(after.stream().max(Comparator.comparingInt(ContactData::getId)).get().getId());
     //добавляем в список созданный контакт

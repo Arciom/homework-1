@@ -2,40 +2,44 @@ package group.tests;
 
 import moduleGroup.GroupData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import testBase.TestBase;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by arciom on 24.05.2017.
  */
 public class GroupModificationTests extends TestBase {
-  @Test
-  public void testGroupModification() {
-    app.getNavigationHelper().gotoGroupPage();
-    if (!app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("test1",
-              null, null));
-    }
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    app.getGroupHelper().selectGroup(before.size() - 1);
-    app.getGroupHelper().initGroupModification();
-    GroupData group = new GroupData(before.get(before.size() - 1).getId(), "test1", "test2", "test3");
-    app.getGroupHelper().fillGroupForm(group);
-    app.getGroupHelper().submitGroupModification();
-    app.getGroupHelper().returnToGroupPage();
-    List<GroupData> after = app.getGroupHelper().getGroupList();
-    Assert.assertEquals(after.size(), before.size() );
 
-    before.remove(before.size() - 1);
-    before.add(group);
-    Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::getId);
-    before.sort(byId);
-    after.sort(byId);
-    Assert.assertEquals(before, after);
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().groupPage();
+    if (app.group().all().size() == 0) {
+      app.group().create(new GroupData().withName("test1"));
+    }
   }
 
+  @Test
+  public void testGroupModification() {
+    Set<GroupData> before = app.group().all();
+    GroupData modifiedGroup = before.iterator().next();
+   // int index = before.size() - 1;
+    GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("test1").
+            withHeader("test2").withFooter("test3");
+    app.group().modify(group);
+    Set<GroupData> after = app.group().all();
+    Assert.assertEquals(after.size(), before.size() );
+
+    before.remove(modifiedGroup);
+    before.add(group);
+    //сортировка не нужна
+   // Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::getId);
+   // before.sort(byId);
+   // after.sort(byId);
+    Assert.assertEquals(before, after);
+  }
 }

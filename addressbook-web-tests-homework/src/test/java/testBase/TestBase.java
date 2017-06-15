@@ -2,8 +2,7 @@ package testBase;
 
 import appmanager.ApplicationManager;
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 import static org.openqa.selenium.remote.BrowserType.FIREFOX;
@@ -14,19 +13,17 @@ import static org.openqa.selenium.remote.BrowserType.IE;
  */
 public class TestBase {
 
-  protected final ApplicationManager app = new ApplicationManager(FIREFOX);
+  protected static final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
 
-  @BeforeMethod
+  @BeforeSuite
   public void setUp() throws Exception {
     app.init();
   }
 
-  @AfterMethod
+  @AfterSuite
   public void tearDown() {
     app.stop();
   }
 
-  public ApplicationManager getApp() {
-    return app;
-  }
+//  public ApplicationManager getApp() {   return app; }
 }
