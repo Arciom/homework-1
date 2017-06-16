@@ -1,6 +1,9 @@
 package group.tests;
 
 import moduleGroup.GroupData;
+import moduleGroup.Groups;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -8,6 +11,10 @@ import testBase.TestBase;
 
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class GroupDeletionTests extends TestBase {
 
@@ -20,28 +27,12 @@ public class GroupDeletionTests extends TestBase {
   }
   @Test
   public void testGroupDeletion() {
-    // заменили метод list на all
-    // тип обЪектов с List на Set
-    Set<GroupData> before = app.group().all();
-    // before.iterator().next(); - выберет из набора любую произвольную группу
-    // iterator последовательно перебирает элементы
-    // next вернёт произвольный элемент множества
-    // deletedGroup и надо удалять перед тем как сравнивать старое и новое множество
-    // deletedGroup и надо удалять в тестируемом приложении
-    // а в качестве идентификатора передавать и deletedGroup поскольку
-    // он в том числе содержит идентификатор
+    Groups before = app.group().all();
     GroupData deletedGroup = before.iterator().next();
- //   int index = before.size() - 1;  можно удалить т.к. не используется
-    // а в качестве идентификатора передавать и deletedGroup поскольку
-    // он в том числе содержит идентификатор
     app.group().delete(deletedGroup);
-    Set<GroupData> after = app.group().all();
-    Assert.assertEquals(after.size(), before.size() - 1);
-    // deletedGroup и надо удалять перед тем как сравнивать старое и новое множество
-    //
-    before.remove(deletedGroup);
-    Assert.assertEquals(before, after);
-
+    Groups after = app.group().all();
+    assertEquals(after.size(), before.size() - 1);
+    assertThat(after, equalTo(before.withOut(deletedGroup)));
   }
 }
 
