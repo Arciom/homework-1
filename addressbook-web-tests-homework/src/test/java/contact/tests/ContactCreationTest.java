@@ -11,21 +11,19 @@ public class ContactCreationTest extends TestBase {
 
   @Test
   public void testContactCreation() {
-    app.goTo().gotoHome();
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.goTo().gotoAddNewPage();
-    ContactData contact = new ContactData(
-            "aaa", "bbb", "ccc",
-            "ddd", "eee", "LLC",
-            "Minsk", "test1");
-    app.getContactHelper().createContact(contact, true);
+    app.goTo().home();
+    List<ContactData> before = app.contact().list();
+    app.goTo().addNewPage();
+    ContactData contact = new ContactData().withFirstname("aaa").
+            withMiddlename("bbb").withLastname("ccc").withNickname("ddd").withtTitle("eee").
+            withtCompany("LLC").withAddress( "Minsk").withtGroup("test1");
 
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.contact().create(contact, true);
+
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 
-   //contact.withId(before.stream().max(Comparator.comparingInt(ContactData::getId)).get().getId());
-    // упорядочиваем списки перед сравнением
-    contact.setId(after.stream().max(Comparator.comparingInt(ContactData::getId)).get().getId());
+   contact.withId(after.stream().max(Comparator.comparingInt(ContactData::getId)).get().getId());
     //добавляем в список созданный контакт
     before.add(contact);
     Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);

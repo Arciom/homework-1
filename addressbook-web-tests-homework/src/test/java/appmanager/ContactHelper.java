@@ -18,16 +18,14 @@ public class ContactHelper extends HelperBase {
   public ContactHelper(WebDriver wd) {
     super(wd);
   }
-
   public void returnToHomePage() {
     click(By.linkText("home page"));
   }
-
   public void submitContactCreation() {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
-
   public void fillContactForm(ContactData contactData, boolean creation) {
+
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("middlename"), contactData.getMiddlename());
     type(By.name("lastname"), contactData.getLastname());
@@ -52,6 +50,13 @@ public class ContactHelper extends HelperBase {
     closeDialog();
   }
 
+  public void home() {
+    if (isElementPresent(By.id("maintable"))) {
+      return;
+    }
+    click(By.linkText("HOME"));
+  }
+
   private void closeDialog() {
     wd.switchTo().alert().accept();
   }
@@ -64,11 +69,24 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void createContact(ContactData contact, boolean creation) {
-
+  public void create(ContactData contact, boolean creation) {
     fillContactForm(contact, creation);
     submitContactCreation();
     returnToHomePage();
+  }
+
+  public void modify(ContactData contact, int index, boolean creation) {
+    selectContact(index);
+    initContactModification(index);
+    fillContactForm(contact, creation);
+    submitContactModification();
+    returnToHomePage();
+  }
+
+  public void delete(int index) {
+   selectContact(index);
+   deleteSelectedContact();
+   home();
   }
 
   public boolean isThereAContact() {
@@ -79,7 +97,7 @@ public class ContactHelper extends HelperBase {
  //   return wd.findElements(By.name("selected[]")).size();
 //  }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[contains(@name,\"entry\")]"));
     //(By.cssSelector("tr[name=entry]")) == (By.xpath("//tr[contains(@name,\"entry\")]"));
@@ -87,10 +105,7 @@ public class ContactHelper extends HelperBase {
       String firstname = getFirstName(element);
       String lastname = getLastName(element);
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-      ContactData contact = new ContactData(id, firstname, null,
-              lastname, null, null, null,
-              null, null);
-      contacts.add(contact);
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
     return contacts;
   }

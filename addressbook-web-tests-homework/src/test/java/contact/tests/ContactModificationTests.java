@@ -2,6 +2,7 @@ package contact.tests;
 
 import moduleContact.ContactData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import testBase.TestBase;
 import java.util.Comparator;
@@ -12,42 +13,32 @@ import java.util.List;
  */
 public class ContactModificationTests extends TestBase {
 
-  @Test
-
-  public void testContactModification() {
-
-    app.goTo().gotoHome();
-
-    if(! app.getContactHelper().isThereAContact()) {
-
-      app.goTo().gotoAddNewPage();
-
-      app.getContactHelper().createContact(new ContactData(
-              "aaa", "bbb", "ccc",
-              "ddd", "eee", "LLC",
-              "Minsk", "test1"), true);
-
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().home();
+    if(app.contact().list().size() == 0) {
+      app.goTo().addNewPage();
+      app.contact().create(new ContactData().withFirstname("aaa").
+              withMiddlename("bbb").withLastname("ccc").withNickname("ddd").withtTitle("eee").
+              withtCompany("LLC").withAddress( "Minsk").withtGroup("test1"), true);
     }
-      List<ContactData> before = app.getContactHelper().getContactList();
-      app.getContactHelper().selectContact(before.size() - 1);
-      app.getContactHelper().initContactModification(before.size() - 1);
+  }
 
-      ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "a", "b",
+  @Test
+  public void testContactModification() {
+      List<ContactData> before = app.contact().list();
+    ContactData contact = new ContactData().withId(before.get(before.size() - 1).getId()).withFirstname("a")
+    .withMiddlename("b").withLastname("c").withNickname("d").withtTitle("e").withtCompany("f").withAddress("i");
 
-              "c", "d", "e",
-
-              "f", "i", null);
-
-      app.getContactHelper().fillContactForm(contact, false);
-      app.getContactHelper().submitContactModification();
-      app.getContactHelper().returnToHomePage();
-      List<ContactData> after = app.getContactHelper().getContactList();
+    int index = before.size() - 1;
+      app.contact().modify(contact, index, false);
+      List<ContactData> after = app.contact().list();
       Assert.assertEquals(after.size(), before.size());
 
       //удаляем из списка строку до модификации
-      before.remove(before.size() - 1);
+      before.remove(index);
        // упорядочиваем списки перед сравнением
-      contact.setId(after.stream().max(Comparator.comparingInt(ContactData::getId)).get().getId());
+      contact.withId(after.stream().max(Comparator.comparingInt(ContactData::getId)).get().getId());
       //добавляем в список строку, которая появляется после модфикации
       before.add(contact);
       Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);

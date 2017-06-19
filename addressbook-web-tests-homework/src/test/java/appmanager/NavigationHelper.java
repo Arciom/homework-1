@@ -24,7 +24,7 @@ public class NavigationHelper extends HelperBase {
 
   }
 
-  public void gotoAddNewPage() {
+  public void addNewPage() {
     if(isElementPresent(By.tagName("h1"))
             && wd.findElement(By.tagName("h1")).getText().equals("EDIT_ADD_ENTRY")){
   return;
@@ -32,7 +32,7 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("ADD_NEW"));
   }
 
-  public void gotoHome() {
+  public void home() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
