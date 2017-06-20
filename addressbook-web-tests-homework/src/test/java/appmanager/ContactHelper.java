@@ -1,6 +1,7 @@
 package appmanager;
 
 import moduleContact.ContactData;
+import moduleContact.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +9,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by arciom on 24.05.2017.
@@ -22,7 +25,8 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("home page"));
   }
   public void submitContactCreation() {
-    click(By.xpath("//div[@id='content']/form/input[21]"));
+    click(By.name("submit"));
+    //click(By.xpath("//div[@id='content']/form/input[21]"));
   }
   public void fillContactForm(ContactData contactData, boolean creation) {
 
@@ -41,10 +45,9 @@ public class ContactHelper extends HelperBase {
     }
   }
 
-  public void selectContact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
+  private void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value = '" + id + "']")).click();
   }
-
   public void deleteSelectedContact() {
     click(By.xpath("//div/div[4]/form[2]/div[2]/input"));
     closeDialog();
@@ -57,12 +60,17 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("HOME"));
   }
 
+  public void addNewPage() {
+    click(By.linkText("ADD_NEW"));
+  }
+
   private void closeDialog() {
     wd.switchTo().alert().accept();
   }
 
-  public void initContactModification(int index) {
-    wd.findElements(By.xpath(".//td[8]")).get(index).click();
+  public void initContactModification(int id) {
+   // wd.findElements(By.xpath(".//td[8]")).get(index).click();
+    wd.findElement(By.cssSelector("a[href = 'edit.php?id=" + id + "']")).click();
   }
 
   public void submitContactModification() {
@@ -70,23 +78,24 @@ public class ContactHelper extends HelperBase {
   }
 
   public void create(ContactData contact, boolean creation) {
+    addNewPage();
     fillContactForm(contact, creation);
     submitContactCreation();
     returnToHomePage();
   }
 
-  public void modify(ContactData contact, int index, boolean creation) {
-    selectContact(index);
-    initContactModification(index);
-    fillContactForm(contact, creation);
+  public void modify(ContactData contact) {
+    selectContactById(contact.getId());
+    initContactModification(contact.getId());
+    fillContactForm(contact, false);
     submitContactModification();
     returnToHomePage();
   }
 
-  public void delete(int index) {
-   selectContact(index);
-   deleteSelectedContact();
-   home();
+  public void delete(ContactData contact) {
+    selectContactById(contact.getId());
+    deleteSelectedContact();
+    home();
   }
 
   public boolean isThereAContact() {
@@ -110,6 +119,20 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
+  public Contacts all() {
+    Contacts contacts = new Contacts();
+    List<WebElement> elements = wd.findElements(By.xpath("//tr[contains(@name,\"entry\")]"));
+    //(By.cssSelector("tr[name=entry]")) == (By.xpath("//tr[contains(@name,\"entry\")]"));
+    for (WebElement element : elements) {
+      String firstname = getFirstName(element);
+      String lastname = getLastName(element);
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+    }
+    return contacts;
+  }
+
+
   private String getLastName(WebElement element) {
     return element.findElement(By.xpath("./td[2]")).getText();
   }
@@ -117,6 +140,8 @@ public class ContactHelper extends HelperBase {
   private String getFirstName(WebElement element) {
     return element.findElement(By.xpath("./td[3]")).getText();
   }
+
+
   //  String lastname = getElementCssSelector(element, "td", 1);
   //  private String getElementCssSelector(WebElement element, String cssSelector, int cellNumber) {
   //  return element.findElements(By.cssSelector(cssSelector)).get(cellNumber).getText();
