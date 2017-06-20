@@ -12,6 +12,8 @@ public class ContactData {
   private String address;
   private String group;
 
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -77,11 +79,12 @@ public class ContactData {
   }
 
   @Override
-  public java.lang.String toString() {
+  public String toString() {
     return "ContactData{" +
             "id=" + id +
-            ", firstname=" + firstname +
-            ", lastname=" + lastname +
+            ", firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", address='" + address + '\'' +
             '}';
   }
 

@@ -9,9 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by arciom on 24.05.2017.
@@ -102,10 +100,6 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
- // public int getContactCount() {
- //   return wd.findElements(By.name("selected[]")).size();
-//  }
-
   public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[contains(@name,\"entry\")]"));
@@ -113,6 +107,7 @@ public class ContactHelper extends HelperBase {
     for (WebElement element : elements) {
       String firstname = getFirstName(element);
       String lastname = getLastName(element);
+
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
       contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
@@ -126,20 +121,22 @@ public class ContactHelper extends HelperBase {
     for (WebElement element : elements) {
       String firstname = getFirstName(element);
       String lastname = getLastName(element);
+      String address = getAddress(element);
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAddress(address));
     }
     return contacts;
   }
 
+  private String getAddress(WebElement element) {
+    return element.findElement(By.xpath("./td[4]")).getText();
+  }
 
   private String getLastName(WebElement element) {
     return element.findElement(By.xpath("./td[2]")).getText();
   }
 
-  private String getFirstName(WebElement element) {
-    return element.findElement(By.xpath("./td[3]")).getText();
-  }
+  private String getFirstName(WebElement element) { return element.findElement(By.xpath("./td[3]")).getText();  }
 
 
   //  String lastname = getElementCssSelector(element, "td", 1);
