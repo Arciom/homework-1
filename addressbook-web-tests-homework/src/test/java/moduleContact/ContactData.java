@@ -11,8 +11,62 @@ public class ContactData {
   private String company;
   private String address;
   private String group;
+  private String homePhone;
+  private String mobilePhone;
+  private String workPhone;
+
+  public ContactData withId(int id) {    this.id = id;    return this;  }
+  public ContactData withAddress(String address) { this.address = address;  return this;}
+  public ContactData withFirstname(String firstname) {    this.firstname = firstname;   return this;}
+  public ContactData withMiddlename(String middlename) {    this.middlename = middlename;   return this;}
+  public ContactData withLastname(String lastname) {    this.lastname = lastname;   return this;}
+  public ContactData withNickname(String nickname) {    this.nickname = nickname;   return this;}
+  public ContactData withTitle(String title) {    this.title = title;  return this;}
+  public ContactData withCompany(String company) {    this.company = company; return this; }
+  public ContactData withGroup(String group) {    this.group = group; return this; }
+  public ContactData withHomePhone(String homePhone) {    this.homePhone = homePhone; return this;  }
+  public ContactData withWorkPhone(String workPhone) {    this.workPhone = workPhone; return this;}
+  public ContactData withMobilePhone(String mobilePhone) {    this.mobilePhone = mobilePhone;  return this;}
 
 
+
+  public int getId() { return id; }
+
+  public String getFirstname() {  return firstname;  }
+  public String getMiddlename() {
+    return middlename;
+  }
+  public String getLastname() {
+    return lastname;
+  }
+  public String getNickname() {
+    return nickname;
+  }
+  public String getTitle() {
+    return title;
+  }
+  public String getCompany() {
+    return company;
+  }
+  public String getAddress() {
+    return address;
+  }
+  public String getGroup() {
+    return group;
+  }
+  public String getHomePhone() {    return homePhone;  }
+  public String getMobilePhone() {    return mobilePhone;  }
+  public String getWorkPhone() {    return workPhone;  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", address='" + address + '\'' +
+            '}';
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -35,57 +89,4 @@ public class ContactData {
     result = 31 * result + (address != null ? address.hashCode() : 0);
     return result;
   }
-
-  public ContactData withId(int id) {    this.id = id;    return this;  }
-  public ContactData withAddress(String address) { this.address = address;  return this;}
-  public ContactData withFirstname(String firstname) {    this.firstname = firstname;   return this;}
-  public ContactData withMiddlename(String middlename) {    this.middlename = middlename;   return this;}
-  public ContactData withLastname(String lastname) {    this.lastname = lastname;   return this;}
-  public ContactData withNickname(String nickname) {    this.nickname = nickname;   return this;}
-  public ContactData withtTitle(String title) {    this.title = title;  return this;}
-  public ContactData withtCompany(String company) {    this.company = company; return this; }
-  public ContactData withtGroup(String group) {    this.group = group; return this; }
-
-  public int getId() { return id; }
-
-  public String getFirstname() {  return firstname;  }
-
-  public String getMiddlename() {
-    return middlename;
-  }
-
-  public String getLastname() {
-    return lastname;
-  }
-
-  public String getNickname() {
-    return nickname;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public String getCompany() {
-    return company;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  public String getGroup() {
-    return group;
-  }
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "id=" + id +
-            ", firstname='" + firstname + '\'' +
-            ", lastname='" + lastname + '\'' +
-            ", address='" + address + '\'' +
-            '}';
-  }
-
 }

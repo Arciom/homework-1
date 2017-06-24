@@ -22,8 +22,8 @@ public class ContactDeletionTests extends TestBase{
     if(app.contact().all().size() == 0) {
       app.goTo().addNewPage();
       app.contact().create(new ContactData().withFirstname("aaa").
-              withMiddlename("bbb").withLastname("ccc").withNickname("ddd").withtTitle("eee").
-              withtCompany("LLC").withAddress( "Minsk").withtGroup("test1"), true);
+              withMiddlename("bbb").withLastname("ccc").withNickname("ddd").withTitle("eee").
+              withCompany("LLC").withAddress( "Minsk").withGroup("test1"), true);
     }
   }
 
