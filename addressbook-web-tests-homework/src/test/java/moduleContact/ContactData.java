@@ -1,5 +1,7 @@
 package moduleContact;
 
+import java.io.File;
+
 public class ContactData {
 
   private int id = Integer.MAX_VALUE;;
@@ -19,7 +21,7 @@ public class ContactData {
   private String email;
   private String email2;
   private String email3;
-
+  private File photos;
 
   public ContactData withId(int id) {    this.id = id;    return this;  }
   public ContactData withAddress(String address) { this.address = address;  return this;}
@@ -38,6 +40,7 @@ public class ContactData {
   public ContactData withEmail(String email) {   this.email = email;    return this;  }
   public ContactData withEmail2(String email2) {  this.email2 = email2;    return this;  }
   public ContactData withEmail3(String email3) {    this.email3 = email3;    return this;  }
+  public ContactData withPhotos(File photos) {    this.photos = photos;    return this;  }
 
   public int getId() { return id; }
   public String getFirstname() {  return firstname;  }
@@ -65,6 +68,8 @@ public class ContactData {
   public String getWorkPhone() {    return workPhone;  }
   public String getAllPhones() {    return allPhones;  }
   public String getAllEmails() {    return allEmails;  }
+  public File getPhoto() {    return photos;  }
+
 
   @Override
   public boolean equals(Object o) {
