@@ -1,8 +1,7 @@
 package contact.tests;
 
 import moduleContact.ContactData;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import testBase.TestBase;
 
@@ -15,7 +14,20 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Created by arciom on 22.06.2017.
  */
-public class ContactPhoneTest extends TestBase{
+public class ContactPhonesTest extends TestBase{
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().home();
+    if(app.contact().all().size() == 0) {
+      app.goTo().addNewPage();
+      app.contact().create(new ContactData().withFirstname("aaa").
+              withMiddlename("bbb").withLastname("ccc").withNickname("ddd").withTitle("eee").
+              withCompany("LLC").withAddress("Minsk").withGroup("test1").withHomePhone("111").
+              withMobilePhone("222").withWorkPhone("333").withEmail("test1@llc.com").
+              withEmail2("test2@llc.by").withEmail3("test3@llc.org"), true);
+    }
+  }
 
   @Test
   public void testContactPhones() {
@@ -32,7 +44,7 @@ public class ContactPhoneTest extends TestBase{
   private String mergePhones(ContactData contact) {
     return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
             .stream().filter((s) -> ! s.equals(""))
-            .map(ContactPhoneTest::cleaned)
+            .map(ContactPhonesTest::cleaned)
             .collect(Collectors.joining("\n"));
   }
 
