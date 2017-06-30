@@ -1,20 +1,70 @@
 [
   {
     "firstname": "Name 0",
+    "middlename": "Middlename 0",
     "lastname": "LastName 0",
+    "nickname": "Nickname 0",
+    "title": "Title 0",
+    "company": "Company 0",
     "address": "Address 0",
-    "group": "Group 0"
+    "group": "Group 0",
+    "homePhone": "HomePhone 0",
+    "mobilePhone": "MobilePhone 0",
+    "workPhone": "WorkPhone 0",
+    "email": "test1@llc.by",
+    "email2": "test2@llc.org",
+    "email3": "test3@llc.com",
+    "photos": {}
   },
   {
     "firstname": "Name 1",
+    "middlename": "Middlename 1",
     "lastname": "LastName 1",
+    "nickname": "Nickname 1",
+    "title": "Title 1",
+    "company": "Company 1",
     "address": "Address 1",
-    "group": "Group 1"
+    "group": "Group 1",
+    "homePhone": "HomePhone 1",
+    "mobilePhone": "MobilePhone 1",
+    "workPhone": "WorkPhone 1",
+    "email": "test1@llc.by",
+    "email2": "test2@llc.org",
+    "email3": "test3@llc.com",
+    "photos": {}
   },
   {
     "firstname": "Name 2",
+    "middlename": "Middlename 2",
     "lastname": "LastName 2",
+    "nickname": "Nickname 2",
+    "title": "Title 2",
+    "company": "Company 2",
     "address": "Address 2",
-    "group": "Group 2"
+    "group": "Group 2",
+    "homePhone": "HomePhone 2",
+    "mobilePhone": "MobilePhone 2",
+    "workPhone": "WorkPhone 2",
+    "email": "test1@llc.by",
+    "email2": "test2@llc.org",
+    "email3": "test3@llc.com",
+    "photos": {}
+  },
+  {
+    "firstname": "Name 3",
+    "middlename": "Middlename 3",
+    "lastname": "LastName 3",
+    "nickname": "Nickname 3",
+    "title": "Title 3",
+    "company": "Company 3",
+    "address": "Address 3",
+    "group": "Group 3",
+    "homePhone": "HomePhone 3",
+    "mobilePhone": "MobilePhone 3",
+    "workPhone": "WorkPhone 3",
+    "email": "test1@llc.by",
+    "email2": "test2@llc.org",
+    "email3": "test3@llc.com",
+    "photos": {}
   }
 ]

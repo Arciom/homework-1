@@ -1,5 +1,4 @@
-Name 0; LastName 0; Address 0; Group 0
-Name 1; LastName 1; Address 1; Group 1
-Name 2; LastName 2; Address 2; Group 2
-Name 3; LastName 3; Address 3; Group 3
-Name 4; LastName 4; Address 4; Group 4
+Name 0; Middlename 0; LastName 0; Nickname 0; Title 0; Company 0; Address 0; Group 0; HomePhone 0; MobilePhone 0; WorkPhone 0;
+Name 1; Middlename 1; LastName 1; Nickname 1; Title 1; Company 1; Address 1; Group 1; HomePhone 1; MobilePhone 1; WorkPhone 1;
+Name 2; Middlename 2; LastName 2; Nickname 2; Title 2; Company 2; Address 2; Group 2; HomePhone 2; MobilePhone 2; WorkPhone 2;
+Name 3; Middlename 3; LastName 3; Nickname 3; Title 3; Company 3; Address 3; Group 3; HomePhone 3; MobilePhone 3; WorkPhone 3;

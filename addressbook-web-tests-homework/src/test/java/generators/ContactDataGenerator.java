@@ -72,7 +72,18 @@ public class ContactDataGenerator {
   private void saveAsScv(List<ContactData> contacts, File file) throws IOException {
     Writer writer = new FileWriter(file);
     for(ContactData contact : contacts) {
-      writer.write((String.format("%s; %s; %s; %s\n", contact.getFirstname(), contact.getLastname(), contact.getAddress(),contact.getGroup())));
+      writer.write((String.format("%s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s;\n",
+              contact.getFirstname(),
+              contact.getMiddlename(),
+              contact.getLastname(),
+              contact.getNickname(),
+              contact.getTitle(),
+              contact.getCompany(),
+              contact.getAddress(),
+              contact.getGroup(),
+              contact.getHomePhone(),
+              contact.getMobilePhone(),
+              contact.getWorkPhone())));
     }
     writer.close();
   }
@@ -81,9 +92,20 @@ public class ContactDataGenerator {
     List<ContactData> contacts = new ArrayList<ContactData>();
     for (int i = 0; i < count; i++) {
       contacts.add(new ContactData().withFirstname(String.format("Name %s", i))
+                                    .withMiddlename(String.format("Middlename %s", i))
                                     .withLastname(String.format("LastName %s", i))
+                                    .withNickname(String.format("Nickname %s", i))
+                                    .withPhotos(new File("src/test/resources/IMG_1263.JPG"))
+                                    .withTitle(String.format("Title %s", i))
+                                    .withCompany(String.format("Company %s", i))
                                     .withAddress(String.format("Address %s", i))
-                                    .withGroup(String.format("Group %s", i)));
+                                    .withGroup(String.format("Group %s", i))
+                                    .withHomePhone(String.format("HomePhone %s", i))
+                                    .withMobilePhone(String.format("MobilePhone %s", i))
+                                    .withWorkPhone(String.format("WorkPhone %s", i))
+                                    .withEmail("test1@llc.by")
+                                    .withEmail2("test2@llc.org")
+                                    .withEmail3("test3@llc.com"));
     }
     return contacts;
   }

@@ -24,11 +24,12 @@ public class ContactCreationTest extends TestBase {
             withEmail2("test2@llc.by").withEmail3("test3@llc.org");
 
     app.contact().create(contact, true);
-    assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
-    assertThat(after, equalTo(before.withAdded(
-            contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-  }
+      assertThat(app.contact().count(), equalTo(before.size() + 1));
+      Contacts after = app.contact().all();
+      assertThat(after, equalTo(before.withAdded(
+              contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    }
+
 
   @Test(enabled = false)
   public void testBadContactCreation() {
