@@ -7,7 +7,7 @@
     <title>Title 0</title>
     <company>Company 0</company>
     <address>Address 0</address>
-    <group>Group 0</group>
+    <group>test1</group>
     <homePhone>HomePhone 0</homePhone>
     <mobilePhone>MobilePhone 0</mobilePhone>
     <workPhone>WorkPhone 0</workPhone>
@@ -24,44 +24,10 @@
     <title>Title 1</title>
     <company>Company 1</company>
     <address>Address 1</address>
-    <group>Group 1</group>
+    <group>test1</group>
     <homePhone>HomePhone 1</homePhone>
     <mobilePhone>MobilePhone 1</mobilePhone>
     <workPhone>WorkPhone 1</workPhone>
-    <email>test1@llc.by</email>
-    <email2>test2@llc.org</email2>
-    <email3>test3@llc.com</email3>
-    <photos>src\test\resources\IMG_1263.JPG</photos>
-  </contact>
-  <contact>
-    <firstname>Name 2</firstname>
-    <middlename>Middlename 2</middlename>
-    <lastname>LastName 2</lastname>
-    <nickname>Nickname 2</nickname>
-    <title>Title 2</title>
-    <company>Company 2</company>
-    <address>Address 2</address>
-    <group>Group 2</group>
-    <homePhone>HomePhone 2</homePhone>
-    <mobilePhone>MobilePhone 2</mobilePhone>
-    <workPhone>WorkPhone 2</workPhone>
-    <email>test1@llc.by</email>
-    <email2>test2@llc.org</email2>
-    <email3>test3@llc.com</email3>
-    <photos>src\test\resources\IMG_1263.JPG</photos>
-  </contact>
-  <contact>
-    <firstname>Name 3</firstname>
-    <middlename>Middlename 3</middlename>
-    <lastname>LastName 3</lastname>
-    <nickname>Nickname 3</nickname>
-    <title>Title 3</title>
-    <company>Company 3</company>
-    <address>Address 3</address>
-    <group>Group 3</group>
-    <homePhone>HomePhone 3</homePhone>
-    <mobilePhone>MobilePhone 3</mobilePhone>
-    <workPhone>WorkPhone 3</workPhone>
     <email>test1@llc.by</email>
     <email2>test2@llc.org</email2>
     <email3>test3@llc.com</email3>
