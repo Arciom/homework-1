@@ -82,7 +82,7 @@ public class ContactCreationTest extends TestBase {
     return list.iterator();
   }
 
-  @Test(dataProvider = "validContactsFromScv")
+  @Test(dataProvider = "validContactsFromXml")
   public void testContactCreation(ContactData contact) {
     app.goTo().home();
     Contacts before = app.contact().all();
