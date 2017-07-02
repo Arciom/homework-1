@@ -24,62 +24,67 @@ public class ContactCreationTest extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader
-            (new File("src/test/resources/contacts.json")));
-    String json = "";
-    String line = reader.readLine();
-    while(line != null) {
-      json += line;
-      line = reader.readLine();
+    try(BufferedReader reader = new BufferedReader(new FileReader
+            (new File("src/test/resources/contacts.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while(line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType());//List<ContactData>.class
+      return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
-    Gson gson = new Gson();
-    List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType());//List<ContactData>.class
-    return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }
 
   @DataProvider
   public Iterator<Object[]> validContactsFromXml() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.xml"));
-    String xml = "";
-    String line = reader.readLine();
-    while (line != null) {
-      xml += line;
-      line = reader.readLine();
+    try (BufferedReader reader = new BufferedReader(new FileReader
+            ("src/test/resources/contacts.xml"))) {
+      String xml = "";
+      String line = reader.readLine();
+      while (line != null) {
+        xml += line;
+        line = reader.readLine();
+      }
+      XStream xStream = new XStream();
+      xStream.processAnnotations(ContactData.class);
+      List<ContactData> contacts = (List<ContactData>) xStream.fromXML(xml);
+      return contacts.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
     }
-    XStream xStream = new XStream();
-    xStream.processAnnotations(ContactData.class);
-    List<ContactData> contacts = (List<ContactData>) xStream.fromXML(xml);
-    return contacts.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
   }
 
   @DataProvider
   public Iterator<Object[]> validContactsFromCsv() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
     File photo = new File("src/test/resources/IMG_1263.JPG");
-    BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.csv"));
-    String line = reader.readLine();
-    while (line != null) {
-      String[] split = line.split(";");
-      list.add(new Object[] {new ContactData()
-              .withFirstname(split[0])
-              .withMiddlename(split[1])
-              .withLastname(split[2])
-              .withNickname(split[3])
-              .withPhotos(photo)
-              .withTitle(split[4])
-              .withCompany(split[5])
-              .withAddress(split[6])
-              .withHomePhone(split[7])
-              .withMobilePhone(split[8])
-              .withWorkPhone(split[9])
-              .withEmail("test1@llc.by")
-              .withEmail2("test2@llc.org")
-              .withEmail3("test3@llc.com")
-              .withGroup("test1")
-      });
-      line = reader.readLine();
-    }
-    return list.iterator();
+   try (BufferedReader reader = new BufferedReader(new FileReader
+           ("src/test/resources/contacts.csv"))) {
+     String line = reader.readLine();
+     while (line != null) {
+       String[] split = line.split(";");
+       list.add(new Object[] {new ContactData()
+               .withFirstname(split[0])
+               .withMiddlename(split[1])
+               .withLastname(split[2])
+               .withNickname(split[3])
+               .withPhotos(photo)
+               .withTitle(split[4])
+               .withCompany(split[5])
+               .withAddress(split[6])
+               .withHomePhone(split[7])
+               .withMobilePhone(split[8])
+               .withWorkPhone(split[9])
+               .withEmail("test1@llc.by")
+               .withEmail2("test2@llc.org")
+               .withEmail3("test3@llc.com")
+               .withGroup("test1")
+       });
+       line = reader.readLine();
+     }
+     return list.iterator();
+   }
   }
 
   @Test(dataProvider = "validContactsFromXml")

@@ -11,9 +11,10 @@ import static org.openqa.selenium.remote.BrowserType.IE;
 /**
  * Created by arciom on 23.05.2017.
  */
-public class TestBase {
+public class TestBase {//BrowserType.FIREFOX
 
-  protected static final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
+  protected static final ApplicationManager app
+          = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
 
   @BeforeSuite
   public void setUp() throws Exception {
