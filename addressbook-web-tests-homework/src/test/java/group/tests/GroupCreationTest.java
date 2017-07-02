@@ -5,6 +5,8 @@ import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import moduleGroup.GroupData;
 import moduleGroup.Groups;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import testBase.TestBase;
@@ -21,7 +23,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTest extends TestBase {
 
-  @DataProvider
+   @DataProvider
   public Iterator<Object[]> validGroupsFromJson() throws IOException {
    try (BufferedReader reader = new BufferedReader(new FileReader
             (new File("src/test/resources/groups.json")))) {
