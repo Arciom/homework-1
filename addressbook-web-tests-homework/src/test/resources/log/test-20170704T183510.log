@@ -1,0 +1,4 @@
+36362 [main] INFO  testBase.TestBase - Start test testGroupCreation with parameters [GroupData{id='2147483647', name='test 0'}]
+41913 [main] INFO  testBase.TestBase - Stop test testGroupCreation
+41914 [main] INFO  testBase.TestBase - Start test testGroupCreation with parameters [GroupData{id='2147483647', name='test 1'}]
+46521 [main] INFO  testBase.TestBase - Stop test testGroupCreation

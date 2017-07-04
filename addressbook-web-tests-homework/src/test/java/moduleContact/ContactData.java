@@ -3,45 +3,77 @@ package moduleContact;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.io.File;
 
+@Entity
+@Table(name = "addressbook")
 @XStreamAlias("contact")
 public class ContactData {
 
+  @Id
+  @Column (name= "id")
   @XStreamOmitField
   private int id = Integer.MAX_VALUE;;
   @Expose
+  @Column (name = "firstname")
   private String firstname;
   @Expose
+  @Column (name= "middlename")
   private String middlename;
   @Expose
+  @Column (name = "lastname")
   private String lastname;
   @Expose
+  @Column (name = "nickname")
   private String nickname;
   @Expose
+  @Column (name = "title")
   private String title;
   @Expose
+ @Column (name = "company")
   private String company;
   @Expose
+  @Column (name = "address")
+  @Type(type = "text")
   private String address;
   @Expose
+  @Transient
   private String group;
+  @Transient
   private String allPhones;
   @Expose
+  @Column (name = "home")
+  @Type(type = "text")
   private String homePhone;
   @Expose
+  @Column (name = "mobile")
+  @Type(type = "text")
   private String mobilePhone;
   @Expose
+  @Column (name = "work")
+  @Type(type = "text")
   private String workPhone;
+  @Transient
   private String allEmails;
   @Expose
+  @Column (name = "email")
+  @Type(type = "text")
   private String email;
   @Expose
+  @Column (name = "email2")
+  @Type(type = "text")
   private String email2;
   @Expose
+  @Column (name = "email3")
+  @Type(type = "text")
   private String email3;
   @Expose
-  private File photos;
+  @Column (name = "photo")
+  @Type(type = "text")
+  private String photos;
 
   public ContactData withId(int id) {    this.id = id;    return this;  }
   public ContactData withAddress(String address) { this.address = address;  return this;}
@@ -60,7 +92,7 @@ public class ContactData {
   public ContactData withEmail(String email) {   this.email = email;    return this;  }
   public ContactData withEmail2(String email2) {  this.email2 = email2;    return this;  }
   public ContactData withEmail3(String email3) {    this.email3 = email3;    return this;  }
-  public ContactData withPhotos(File photos) {    this.photos = photos;    return this;  }
+  public ContactData withPhotos(File photos) {    this.photos = photos.getPath();    return this;  }
 
   public int getId() { return id; }
   public String getFirstname() {  return firstname;  }
@@ -88,8 +120,7 @@ public class ContactData {
   public String getWorkPhone() {    return workPhone;  }
   public String getAllPhones() {    return allPhones;  }
   public String getAllEmails() {    return allEmails;  }
-  public File getPhoto() {    return photos;  }
-
+  public File getPhoto() {    return new File(photos);  }
 
   @Override
   public boolean equals(Object o) {

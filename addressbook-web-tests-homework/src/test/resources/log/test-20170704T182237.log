@@ -1,0 +1,2 @@
+34141 [main] INFO  testBase.TestBase - Start test testContactCreation with parameters [ContactData{id=0, firstname='Name 0', lastname='LastName 0', address='Address 0', group='test1', homePhone='HomePhone 0', mobilePhone='MobilePhone 0', workPhone='WorkPhone 0', email1='test1@llc.by', email2='test2@llc.org', email3='test3@llc.com'}]
+43625 [main] INFO  testBase.TestBase - Stop test testContactCreation
