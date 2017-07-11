@@ -22,7 +22,7 @@ public class ContactModificationTests extends TestBase {
       app.goTo().addNewPage();
       app.contact().create(new ContactData().withFirstname("aaa").
               withMiddlename("bbb").withLastname("ccc").withNickname("ddd").withTitle("eee").
-              withCompany("LLC").withAddress("Minsk").withGroup("test1").withHomePhone("111").
+              withCompany("LLC").withAddress("Minsk").withHomePhone("111").
               withMobilePhone("222").withWorkPhone("333").withEmail("test1@llc.com").
               withEmail2("test2@llc.by").withEmail3("test3@llc.org").
               withPhotos(new java.io.File("src/test/resources/IMG_1263.JPG"))

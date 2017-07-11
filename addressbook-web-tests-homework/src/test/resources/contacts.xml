@@ -7,7 +7,6 @@
     <title>Title 0</title>
     <company>Company 0</company>
     <address>Address 0</address>
-    <group>test1</group>
     <homePhone>HomePhone 0</homePhone>
     <mobilePhone>MobilePhone 0</mobilePhone>
     <workPhone>WorkPhone 0</workPhone>
@@ -15,5 +14,6 @@
     <email2>test2@llc.org</email2>
     <email3>test3@llc.com</email3>
     <photos>src\test\resources\IMG_1263.JPG</photos>
+    <groups/>
   </contact>
 </list>

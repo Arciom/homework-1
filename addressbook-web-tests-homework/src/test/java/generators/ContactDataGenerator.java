@@ -104,7 +104,8 @@ public class ContactDataGenerator {
                                     .withEmail("test1@llc.by")
                                     .withEmail2("test2@llc.org")
                                     .withEmail3("test3@llc.com")
-                                    .withGroup("test1"));
+                                  //  .withGroup("test1")
+                                     );
       }
     return contacts;
   }

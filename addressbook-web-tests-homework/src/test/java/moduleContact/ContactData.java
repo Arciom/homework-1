@@ -3,10 +3,14 @@ package moduleContact;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import moduleGroup.GroupData;
+import moduleGroup.Groups;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -40,9 +44,9 @@ public class ContactData {
  //@Column (name = "address")
  // @Type(type = "text")
   private String address;
-  @Expose
-  @Transient
-  private String group;
+//  @Expose
+//  @Transient
+//  private String group;
   @Transient
   private String allPhones;
   @Expose
@@ -76,6 +80,11 @@ public class ContactData {
   @Type(type = "text")
   private String photos;
 
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name="address_in_groups", joinColumns = @JoinColumn(name = "id")
+            ,inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
   public ContactData withId(int id) {    this.id = id;    return this;  }
   public ContactData withAddress(String address) { this.address = address;  return this;}
   public ContactData withFirstname(String firstname) {    this.firstname = firstname;   return this;}
@@ -84,7 +93,7 @@ public class ContactData {
   public ContactData withNickname(String nickname) {    this.nickname = nickname;   return this;}
   public ContactData withTitle(String title) {    this.title = title;  return this;}
   public ContactData withCompany(String company) {    this.company = company; return this; }
-  public ContactData withGroup(String group) {    this.group = group; return this; }
+ // public ContactData withGroup(String group) {    this.group = group; return this; }
   public ContactData withAllPhones(String allPhones) {  this.allPhones = allPhones;  return this;}
   public ContactData withHomePhone(String homePhone) {    this.homePhone = homePhone; return this;  }
   public ContactData withWorkPhone(String workPhone) {    this.workPhone = workPhone; return this;}
@@ -115,7 +124,8 @@ public class ContactData {
   public String getAddress() {
     return address;
   }
-  public String getGroup() {    return group;  }
+//  public String getGroup() {    return group;  }
+  public Groups getGroups() {  return new Groups(groups); }
   public String getHomePhone() {    return homePhone;  }
   public String getMobilePhone() {    return mobilePhone;  }
   public String getWorkPhone() {    return workPhone;  }
@@ -173,7 +183,7 @@ public class ContactData {
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             ", address='" + address + '\'' +
-            ", group='" + group + '\'' +
+           // ", group='" + group + '\'' +
             ", homePhone='" + homePhone + '\'' +
             ", mobilePhone='" + mobilePhone + '\'' +
             ", workPhone='" + workPhone + '\'' +
@@ -183,4 +193,8 @@ public class ContactData {
             '}';
   }
 
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
 }

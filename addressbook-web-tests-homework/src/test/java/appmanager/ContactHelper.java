@@ -2,6 +2,8 @@ package appmanager;
 
 import moduleContact.ContactData;
 import moduleContact.Contacts;
+import moduleGroup.GroupData;
+import moduleGroup.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,9 +21,7 @@ public class ContactHelper extends HelperBase {
   public ContactHelper(WebDriver wd) {
     super(wd);
   }
-  public void returnToHomePage() {
-    click(By.linkText("home page"));
-  }
+  public void returnToHomePage() {    click(By.linkText("home page"));  }
   public void submitContactCreation() {    click(By.name("submit"));
     //click(By.xpath("//div[@id='content']/form/input[21]"));
   }
@@ -43,10 +43,19 @@ public class ContactHelper extends HelperBase {
     type(By.name("email3"), contactData.getEmail3());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      if(contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+     new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(
+             contactData.getGroups().iterator().next().getName());}
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
+  }
+
+  public void fillContactEnsureForm(ContactData contactData) {
+    type(By.name("firstname"), contactData.getFirstname());
+    type(By.name("lastname"), contactData.getLastname());
+    type(By.name("address"), contactData.getAddress());
   }
 
   private void selectContactById(int id) {
@@ -89,6 +98,14 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
+  public void createEnsureContact(ContactData contact, boolean creation) {
+    addNewPage();
+    fillContactEnsureForm(contact);
+    submitContactCreation();
+    contactCache = null;
+    returnToHomePage();
+  }
+
   public void modify(ContactData contact) {
     selectContactById(contact.getId());
     initContactModification(contact.getId());
@@ -103,6 +120,45 @@ public class ContactHelper extends HelperBase {
     deleteSelectedContact();
     contactCache = null;
     home();
+  }
+
+  public void addContact(ContactData contact, GroupData group) {
+    home();
+    selectContactById(contact.getId());
+    addSelectedContactToGroup(group);
+    contactCache = null;
+    home();
+  }
+
+  public void deleteFromGroup(ContactData contact, GroupData group) {
+  //  returnToHomePage();
+    home();
+    selectGroupById(String.valueOf(group.getId()));
+    selectContactById(contact.getId());
+    click(By.name("remove"));
+    returnToHomePage();
+    selectGroupById("");
+    contactCache = null;
+    home();
+  //  returnToHomePage();
+  }
+
+  private void selectGroupById(String id) {
+    new Select(wd.findElement(By.name("group"))).selectByValue(id);
+  }
+
+
+
+
+//  private void SelectedGroupById(String id) {
+//    new Select(wd.findElement(By.name("group"))).selectByValue(id);
+//  }
+
+
+
+  private void addSelectedContactToGroup(GroupData group) {
+    new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(group.getId()));
+    click(By.xpath("//div[@id='content']/form[2]/div[4]/input"));
   }
 
   public boolean isThereAContact() {
@@ -200,8 +256,15 @@ public class ContactHelper extends HelperBase {
  //   wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
   }
 
-
-
+  public GroupData getGroupToAdd(Groups groups, ContactData contact) {
+    Groups beforeAssignmentGroups = contact.getGroups();
+    for(GroupData group : groups) {
+      if(!beforeAssignmentGroups.contains(group)) {
+        return group;
+      }
+    }
+    return null;
+  }
   //  String lastname = getElementCssSelector(element, "td", 1);
   //  private String getElementCssSelector(WebElement element, String cssSelector, int cellNumber) {
   //  return element.findElements(By.cssSelector(cssSelector)).get(cellNumber).getText();

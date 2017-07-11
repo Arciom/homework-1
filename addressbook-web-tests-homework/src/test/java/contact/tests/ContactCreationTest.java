@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import moduleContact.ContactData;
 import moduleContact.Contacts;
+import moduleGroup.Groups;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import testBase.TestBase;
@@ -79,7 +80,7 @@ public class ContactCreationTest extends TestBase {
                .withEmail("test1@llc.by")
                .withEmail2("test2@llc.org")
                .withEmail3("test3@llc.com")
-               .withGroup("test1")
+              // .withGroup("test1")
        });
        line = reader.readLine();
      }
@@ -89,9 +90,10 @@ public class ContactCreationTest extends TestBase {
 
   @Test(dataProvider = "validContactsFromXml")
   public void testContactCreation(ContactData contact) {
+    Groups groups = app.db().groups();
     app.goTo().home();
     Contacts before = app.db().contacts();
-    app.contact().create(contact, true);
+    app.contact().create(contact.inGroup(groups.iterator().next()), true);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.withAdded(
@@ -106,7 +108,7 @@ public class ContactCreationTest extends TestBase {
     Contacts before = app.db().contacts();
     ContactData contact = new ContactData().withFirstname("'").
             withMiddlename("bbb").withLastname("ccc").withNickname("ddd").withTitle("eee").
-            withCompany("LLC").withAddress("Minsk").withGroup("test1").withHomePhone("111").withMobilePhone("222").
+            withCompany("LLC").withAddress("Minsk").withHomePhone("111").withMobilePhone("222").
             withWorkPhone("333").withEmail("test1@llc.com").withEmail2("test2@llc.by").withEmail3("test3@llc.org");
 
     app.contact().create(contact, true);

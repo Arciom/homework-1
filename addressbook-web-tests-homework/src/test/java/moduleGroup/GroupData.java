@@ -3,12 +3,17 @@ package moduleGroup;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import moduleContact.ContactData;
+import moduleContact.Contacts;
 import org.hibernate.annotations.Table;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("group")
 @Entity
@@ -29,6 +34,8 @@ public class GroupData {
   @Column(name = "group_footer")
   @Type(type = "text")
   private String footer;
+  @ManyToMany(mappedBy = "groups")
+  private Set<ContactData> contacts = new HashSet<ContactData>();
 
   public GroupData withId(int id) {
     this.id = id;
@@ -70,6 +77,11 @@ public class GroupData {
 
   public int getId() {
     return id;
+  }
+//  public Groups getGroups() {  return new Groups(groups); }
+
+  public Contacts getContacts() {
+    return new Contacts(contacts);
   }
 
   @Override
