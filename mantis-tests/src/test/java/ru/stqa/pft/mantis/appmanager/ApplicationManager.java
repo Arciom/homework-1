@@ -26,13 +26,13 @@ public class ApplicationManager {
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
-
+  private ResetPasswordHelper resetPassword;
+  private DbHelper db;
 
   public ApplicationManager(String browser){
     this.browser = browser;
     properties = new Properties();
   }
-
 
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
@@ -94,5 +94,19 @@ public class ApplicationManager {
       jamesHelper = new JamesHelper(this);
     }
     return jamesHelper;
+  }
+
+  public ResetPasswordHelper resetPassword() {
+    if(resetPassword == null) {
+      resetPassword = new ResetPasswordHelper(this);
+    }
+    return resetPassword;
+  }
+
+  public DbHelper db() {
+    if (db == null) {
+      db = new DbHelper(this);
+    }
+    return db;
   }
 }

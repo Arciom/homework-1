@@ -42,7 +42,7 @@ public class JamesHelper {
 
   public void createUser(String name, String password) {
     initTelnetSession();
-    write("add user" + name + " " + password);
+    write("adduser" + name + " " + password);
     String result = readUntil("User " + name + " added");
     closeTelnetSession();
   }
@@ -64,9 +64,7 @@ public class JamesHelper {
       telnet.connect(mailserver, port);
       in = telnet.getInputStream();
       out = new PrintStream(telnet.getOutputStream());
-    } catch (SocketException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
 

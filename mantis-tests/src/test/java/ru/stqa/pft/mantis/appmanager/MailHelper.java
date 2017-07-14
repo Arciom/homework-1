@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  */
 public class MailHelper {
   private ApplicationManager app;
-  private final Wiser wiser;
+  private Wiser wiser;
 
   public MailHelper(ApplicationManager app) {
     this.app = app;
