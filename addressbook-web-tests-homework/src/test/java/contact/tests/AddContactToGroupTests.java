@@ -35,7 +35,7 @@ public class AddContactToGroupTests extends TestBase{
       app.contact().create(new ContactData()
               .withFirstname("A")
               .withLastname("B")
-              .withAddress("Minsk"));
+              .withAddress("Minsk"), true);
     } else {
       ContactData contact= app.db().contacts().iterator().next();
       if(contact.getGroups().size() == 0) {

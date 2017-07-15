@@ -13,15 +13,13 @@ import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by arciom on 24.05.2017.
- */
 public class ContactHelper extends HelperBase {
 
   public ContactHelper(WebDriver wd) {
     super(wd);
   }
-  public void returnToHomePage() {    click(By.linkText("home page"));  }
+  public void returnToHomePage() {   click(By.linkText("home page"));}
+  public void returnFromGroupPage() {    click(By.linkText("group page 'test1'"));}
   public void submitContactCreation() {    click(By.name("submit"));
     //click(By.xpath("//div[@id='content']/form/input[21]"));
   }
@@ -31,7 +29,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("middlename"), contactData.getMiddlename());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("nickname"), contactData.getNickname());
-    attach(By.name("photo"), contactData.getPhoto());
+   // attach(By.name("photo"), contactData.getPhoto());
     type(By.name("title"), contactData.getTitle());
     type(By.name("company"), contactData.getCompany());
     type(By.name("address"), contactData.getAddress());
@@ -137,6 +135,7 @@ public class ContactHelper extends HelperBase {
     selectContactById(contact.getId());
     click(By.name("remove"));
     returnToHomePage();
+    //returnFromGroupPage();
     selectGroupById("");
     contactCache = null;
     home();

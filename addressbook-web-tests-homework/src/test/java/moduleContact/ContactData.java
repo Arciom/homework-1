@@ -131,7 +131,7 @@ public class ContactData {
   public String getWorkPhone() {    return workPhone;  }
   public String getAllPhones() {    return allPhones;  }
   public String getAllEmails() {    return allEmails;  }
-  public File getPhoto() {    return new File(photos);  }
+//  public File getPhoto() {    return new File(photos);  }
   public String getEmail() {    return email;  }
   public String getEmail2() {    return email2;  }
   public String getEmail3() {    return email3;  }
