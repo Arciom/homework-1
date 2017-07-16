@@ -77,11 +77,6 @@ public class AddContactToGroupTests extends TestBase{
       beforeWithAddedGroups = beforeAddGroups.withAdded(lastAddedGroup);
     }
     Groups groupAfter = app.db().contactById(contactId).getGroups();
-    assertThat(groupAfter, equalTo(beforeAddGroups));
+    assertThat(groupAfter, equalTo(beforeWithAddedGroups));
   }
-
-
-
-
-
 }
