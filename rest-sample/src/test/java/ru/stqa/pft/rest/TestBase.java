@@ -9,7 +9,7 @@ import org.apache.http.client.fluent.Request;
 import org.testng.SkipException;
 import java.io.IOException;
 
-import static com.jayway.jsonpath.JsonPath.read;
+
 
 public class TestBase {
 }
