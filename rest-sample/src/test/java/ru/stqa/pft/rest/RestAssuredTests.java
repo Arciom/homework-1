@@ -19,15 +19,18 @@ import java.util.Set;
 /**
  * Created by arciom on 16.07.2017.
  */
-public class RestAssuredTests {
+public class RestAssuredTests extends TestBase{
 
   @BeforeClass
-  public void init() {
-    RestAssured.authentication = RestAssured.basic("LSGjeU4yP1X493ud1hNniA==", "");
+  public void init() throws IOException {
+    RestAssured.authentication = RestAssured.
+            basic("LSGjeU4yP1X493ud1hNniA==", "");
+    skipIfNotFixed(1);
   }
 
   @Test
   public void testCreateIssue() throws IOException {
+
     Set<Issue> oldIssues = getIssues();
     Issue newIssue = new Issue().withSubject("Test issue").withDescription("New test issue");
     int issueId = createIssue(newIssue);
