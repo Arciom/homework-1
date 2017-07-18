@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.Set;
-
-/**
- * Created by arciom on 15.07.2017.
- */
+ 
 public class SoapTests extends TestBase{
 
   @Test
