@@ -50,7 +50,8 @@ public class ApplicationManager {
         wd = new ChromeDriver();
       } else if (browser.equals(BrowserType.IE)) {
         wd = new InternetExplorerDriver();
-      }} else {
+      }
+    } else {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName(browser);
         wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server"))
