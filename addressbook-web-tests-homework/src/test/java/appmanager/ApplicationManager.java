@@ -42,20 +42,12 @@ public class ApplicationManager {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
     dbHleper = new DbHelper();
-
-    if("".equals(properties.getProperty("selenium.server"))) {
-      if (browser.equals(BrowserType.FIREFOX)) {
-        wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
-      } else if (browser.equals(BrowserType.CHROME)) {
-        wd = new ChromeDriver();
-      } else if (browser.equals(BrowserType.IE)) {
-        wd = new InternetExplorerDriver();
-      }
-    } else {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName(browser);
-        wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server"))
-                , capabilities);
+    if (browser.equals(BrowserType.FIREFOX)) {
+      wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
+    } else if (browser.equals(BrowserType.CHROME)) {
+      wd = new ChromeDriver();
+    } else if(browser.equals(BrowserType.IE)) {
+      wd = new InternetExplorerDriver();
     }
 
     wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
