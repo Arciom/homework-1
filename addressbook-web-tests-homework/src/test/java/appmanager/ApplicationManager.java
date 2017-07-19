@@ -20,9 +20,6 @@ import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
-/**
- * Created by arciom on 24.05.2017.
- */
 public class ApplicationManager {
 
   private final Properties properties;
@@ -53,12 +50,11 @@ public class ApplicationManager {
         wd = new ChromeDriver();
       } else if (browser.equals(BrowserType.IE)) {
         wd = new InternetExplorerDriver();
-      } else {
+      }} else {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName(browser);
         wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server"))
                 , capabilities);
-      }
     }
 
     wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
