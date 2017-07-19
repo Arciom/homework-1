@@ -16,15 +16,19 @@ public class MailHelper {
   private ApplicationManager app;
   private Wiser wiser;
 
+  //при инициализации создается объект типа Wiser. Это и есть почтовый сервер
   public MailHelper(ApplicationManager app) {
     this.app = app;
     wiser = new Wiser();
   }
 
-  public List<MailMessage> waitForMail(int count, long timeout) {
-    long start = System.currentTimeMillis();
+  //ожидание прихода почты (count - кол-во ожидаемых писем, timeout - время ожидания)
+  public List<MailMessage> waitForMail(int count, long timeout) throws javax.mail.MessagingException, IOException {
+    long start = System.currentTimeMillis(); //запоминаем текущее время
+    //цикл, проверяющий, что новое текущее время не превышает (момент старта + таймаут)
     while(System.currentTimeMillis() < start + timeout) {
-      if(wiser.getMessages().size() >= count) {
+      if(wiser.getMessages().size() >= count) {//если почты пришло достаточно много, то прекращаем ожидание
+        //преобразуем реальные объекты с сервера в модельные объекты
         return wiser.getMessages().stream().map((m) -> toModelMail(m)).collect(Collectors.toList());//Лекция 8.6
       }
       try {
@@ -38,7 +42,9 @@ public class MailHelper {
 
   public static MailMessage toModelMail(WiserMessage m) {
     try {
-      MimeMessage mm = m.getMimeMessage();
+      MimeMessage mm = m.getMimeMessage();//берем реальный объект
+      //берем список получателей и оставляем только первого из них (он там точно один)
+      //и преобразуем письмо в строку, значение которой и попадает в модельный объект
       return new MailMessage(mm.getAllRecipients()[0].toString()
               ,(String) mm.getContent());
     } catch (MessagingException e) {
@@ -49,7 +55,8 @@ public class MailHelper {
       return null;
     }
   }
-
+  //запуск почтового сервера
   public void start() { wiser.start(); }
+  //остановка почтового сервера
   public void stop() { wiser.stop(); }
 }

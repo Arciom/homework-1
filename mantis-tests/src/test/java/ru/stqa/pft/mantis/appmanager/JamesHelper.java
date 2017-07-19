@@ -29,6 +29,7 @@ public class JamesHelper {
   public JamesHelper(ApplicationManager app) {
     this.app = app;
     telnet = new TelnetClient();
+    //создается почтовая сессия
     mailSession = Session.getDefaultInstance(System.getProperties());
   }
 
@@ -68,6 +69,7 @@ public class JamesHelper {
       e.printStackTrace();
     }
 
+// Don't know why it doesn't allow login at the first attempt
     readUntil("Login id: ");
     write("");
     readUntil("Password; ");
@@ -78,9 +80,11 @@ public class JamesHelper {
     readUntil("Password; ");
     write(password);
 
+    // Read welcome message
     readUntil("Welcome " + login + ". HELP for a list of commands");
   }
 
+  //посимвольное чтение до тех пор, пока не появится соотв. текст
   private String readUntil(String pattern) {
     try {
       char lastChar = pattern.charAt(pattern.length() - 1);

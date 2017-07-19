@@ -31,15 +31,22 @@ public class HttpSession {
   }
 
   public boolean login(String usernsme, String password) throws IOException {
-    HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php");
+    HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php");//формируем post-запрос (запрос с параметрами)
+
+    //формируем параметры
     List<NameValuePair> params = new ArrayList<NameValuePair>();
     params.add(new BasicNameValuePair("username", usernsme));
     params.add(new BasicNameValuePair("password", password));
     params.add(new BasicNameValuePair("secure_session", "on"));
     params.add(new BasicNameValuePair("retrun", "index.php"));
+
+    //упаковываем параметры и помещаем в созданный запрос
     post.setEntity(new UrlEncodedFormEntity(params));
     CloseableHttpResponse response = httpClient.execute(post);
     String body = getTextFrom(response);
+
+    //проверяем, действительно ли пользователь успешно вошел
+    //признак этого - код страницы содержит строку <span class="user-info">%s</span>
     return body.contains(String.format("<span class=\"italic\">%s</span>", usernsme));
   }
 
@@ -51,8 +58,9 @@ public class HttpSession {
     }
   }
 
+  //определяем, какой пользователь сейчас залогинен
   public boolean isLoggedInAs(String username) throws IOException {
-    HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
+    HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");//отправка get-запроса (параметры не передаются)
     CloseableHttpResponse response = httpClient.execute(get);
     String body = getTextFrom(response);
     return body.contains(String.format("<span class=\"italic\">%s</span>", username));

@@ -5,7 +5,9 @@ package ru.stqa.pft.mantis.model;
  */
 public class MailMessage {
 
+  //кому пришло письмо
   public String to;
+  //текст письма
   public String text;
 
   public MailMessage(String to, String text) {
