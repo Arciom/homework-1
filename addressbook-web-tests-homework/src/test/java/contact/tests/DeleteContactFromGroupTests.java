@@ -3,8 +3,7 @@ package contact.tests;
 import moduleContact.ContactData;
 import moduleGroup.GroupData;
 import moduleGroup.Groups;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
+import moduleContact.Contacts;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import testBase.TestBase;
@@ -42,11 +41,24 @@ public class DeleteContactFromGroupTests extends TestBase{
 
   @Test
   public void testDeleteContactFromGroup() {
-    ContactData contact = app.db().contacts().iterator().next();
-    Groups before = contact.getGroups();
-    GroupData deleteGroup = before.iterator().next();
-    app.contact().deleteFromGroup(contact, deleteGroup);
-    Groups after = app.db().contactById(contact.getId()).getGroups();
-    assertThat(after, equalTo(before.withOut(deleteGroup)));
+//situatedGroupForRemoveContact() == groupForRemoveContact()
+    Contacts beforeContacts = app.db().groupForRemoveContact().getContacts();
+    int situatedGroupIDForRemoveContact = app.db().groupForRemoveContact().getId();
+    app.goTo().home();
+    app.contact().contactsFilterByGroup(situatedGroupIDForRemoveContact);
+    ContactData selectedContact = beforeContacts.iterator().next();
+    app.contact().selectContactById(selectedContact.getId());
+    app.contact().remove();
+    app.goTo().home();
+
+    Contacts afterContacts = app.db().getGroupFromDb(situatedGroupIDForRemoveContact).getContacts();
+    assertThat(afterContacts, equalTo(beforeContacts.withOut(selectedContact)));
+
+//    ContactData contact = app.db().contacts().iterator().next();
+//    Groups before = contact.getGroups();
+//    GroupData deleteGroup = before.iterator().next();
+//    app.contact().deleteFromGroup(contact, deleteGroup);
+ //Groups after = app.db().contactById(contact.getId()).getGroups();
+//    assertThat(after, equalTo(before.withOut(deleteGroup)));
   }
 }

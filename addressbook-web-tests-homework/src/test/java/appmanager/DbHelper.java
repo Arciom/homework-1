@@ -56,4 +56,23 @@ public class DbHelper {
     session.close();
     return result;
   }
+
+  public GroupData groupForRemoveContact() {
+    Groups groups = groups();
+    for (GroupData group : groups) {
+      if (group.getContacts().size() > 0) {
+        return group;
+      }
+    }
+    return null;
+  }
+
+  public GroupData getGroupFromDb(int id) {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    GroupData result = (GroupData) session.createQuery("from GroupData where id=" + id).getSingleResult();
+    session.getTransaction().commit();
+    session.close();
+    return result;
+  }
 }

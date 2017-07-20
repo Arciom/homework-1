@@ -1,5 +1,6 @@
 package appmanager;
 
+import moduleContact.ContactData;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -32,6 +33,7 @@ public class ApplicationManager {
   private ContactHelper contactHelper;
   private String browser;
   private DbHelper dbHleper;
+  private ContactData contactData;
 
   public ApplicationManager(String browser){
     this.browser = browser;
@@ -74,6 +76,11 @@ public class ApplicationManager {
   public GroupHelper group() {
     return groupHelper;
   }
+
+  public ContactData contactData()  {
+    return contactData();
+  };
+
 
   public ContactHelper contact() {
     return contactHelper;

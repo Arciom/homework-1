@@ -56,7 +56,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("address"), contactData.getAddress());
   }
 
-  private void selectContactById(int id) {
+  public void selectContactById(int id) {
     wd.findElement(By.cssSelector("input[value = '" + id + "']")).click();
   }
   public void deleteSelectedContact() {
@@ -134,12 +134,7 @@ public class ContactHelper extends HelperBase {
     selectGroupById(String.valueOf(group.getId()));
     selectContactById(contact.getId());
     click(By.name("remove"));
-    returnToHomePage();
-    //returnFromGroupPage();
-    selectGroupById("");
-    contactCache = null;
     home();
-  //  returnToHomePage();
   }
 
   private void selectGroupById(String id) {
@@ -268,6 +263,12 @@ public class ContactHelper extends HelperBase {
   //  private String getElementCssSelector(WebElement element, String cssSelector, int cellNumber) {
   //  return element.findElements(By.cssSelector(cssSelector)).get(cellNumber).getText();
 
+  public void contactsFilterByGroup(int id) {
+    wd.findElement(By.xpath("//select[@name='group']")).click();
+    wd.findElement(By.xpath("//option[@value='" + id + "']")).click();
+  }
+
+  public void remove() {click(By.name("remove"));  }
 }
 
 

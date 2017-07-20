@@ -37,6 +37,7 @@ public class GroupData {
   @ManyToMany(mappedBy = "groups")
   private Set<ContactData> contacts = new HashSet<ContactData>();
 
+
   public GroupData withId(int id) {
     this.id = id;
     return this;
