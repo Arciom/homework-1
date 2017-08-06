@@ -5,9 +5,18 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests-homework.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests-homework.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests-homework_main.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests-homework_main.iml" group="addressbook-web-tests-homework" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests-homework_test.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests-homework_test.iml" group="addressbook-web-tests-homework" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example-mantist.iml" filepath="$PROJECT_DIR$/.idea/modules/example-mantist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example-mantist_main.iml" filepath="$PROJECT_DIR$/.idea/modules/example-mantist_main.iml" group="example-mantist" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example-mantist_test.iml" filepath="$PROJECT_DIR$/.idea/modules/example-mantist_test.iml" group="example-mantist" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/exemple.iml" filepath="$PROJECT_DIR$/.idea/modules/exemple.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/exemple_main.iml" filepath="$PROJECT_DIR$/.idea/modules/exemple_main.iml" group="exemple" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/exemple_test.iml" filepath="$PROJECT_DIR$/.idea/modules/exemple_test.iml" group="exemple" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/github-sample.iml" filepath="$PROJECT_DIR$/.idea/modules/github-sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/github-sample_main.iml" filepath="$PROJECT_DIR$/.idea/modules/github-sample_main.iml" group="github-sample" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/github-sample_test.iml" filepath="$PROJECT_DIR$/.idea/modules/github-sample_test.iml" group="github-sample" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mailTutBy.iml" filepath="$PROJECT_DIR$/.idea/modules/mailTutBy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mailTutBy_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mailTutBy_main.iml" group="mailTutBy" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mailTutBy_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mailTutBy_test.iml" group="mailTutBy" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests_main.iml" group="mantis-tests" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests_test.iml" group="mantis-tests" />

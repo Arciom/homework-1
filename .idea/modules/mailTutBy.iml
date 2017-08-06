@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="mailTutBy" external.linked.project.path="$MODULE_DIR$/../../mailTutBy" external.root.project.path="$MODULE_DIR$/../../mailTutBy" external.system.id="GRADLE" external.system.module.group="" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../mailTutBy">
+      <excludeFolder url="file://$MODULE_DIR$/../../mailTutBy/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../mailTutBy/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../mailTutBy/out" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

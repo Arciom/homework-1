@@ -27,9 +27,19 @@ public class HttpSession {
 
   public HttpSession(ApplicationManager app) {
     this.app = app;
+    //когда в appmanager создаётся вызывается метод newSession() создаётся новыё экземпляр
+    // помощника новый клиент - сессия (строка ниже - создание клиента)
+    // который будет отпровлять запросы на сервер
+
+     // метод setRedirectStrategy устанавливает новую стратегию перенаправления,
+     // если его этот метод не установить при запросе придёт ответ 302 придется самотсоятельно
+    // обрабатывать перенаправление.
+    // чтобы он это делал автоматически указываем ему
+    // стратегию перенаправления new LaxRedirectStrategy()
+    // итак создан новый объект помещенный в  httpClient
     httpClient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
   }
-
+// в пошнике реализовано два метода login - выполняет вход, второй
   public boolean login(String usernsme, String password) throws IOException {
     HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php");//формируем post-запрос (запрос с параметрами)
 
